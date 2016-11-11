@@ -8,9 +8,11 @@ class urlExtension implements ExtensionInterface {
     
     private $_container;
     
-    public function setContainer($container){
-        $this->_container = $container;
+    public function __construct(){
+        $this->_container = hubert()->container();
     }
+
+
     public function register(Engine $engine)
     {
         $engine->registerFunction('url', [$this, 'getUrl']);

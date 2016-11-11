@@ -9,8 +9,7 @@ return array(
                 "route" => "/", 
                 "method" => "GET|POST", 
                 "target" => function($request, $response, $args){
-                    $container = $this->getContainer();
-                    $html = $container["template"]->render("index", array("name" => "hubert"));
+                    $html = hubert()->container()->template->render("index", array("name" => "hubert"));
                     $response->getBody()->write($html);
                     return $response;
                 }
