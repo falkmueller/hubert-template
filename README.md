@@ -43,7 +43,7 @@ $config = array(
             "route" => "/", 
             "method" => "GET|POST", 
             "target" => function($request, $response, $args){
-                $container = $this->getContainer();
+                $container = hubert()->container();     
                 $html = $container["template"]->render("index", array("name" => "hubert"));
                 $response->getBody()->write($html);
                 return $response;
@@ -51,8 +51,8 @@ $config = array(
         ),
 );
 
-$app->loadConfig($config);
-$app->emit($app->run());
+hubert($config);
+hubert()->emit(hubert()->run());
 ```
 
 For more see the example in this repository.
