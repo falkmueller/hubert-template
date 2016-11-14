@@ -9,7 +9,7 @@ return array(
                 "route" => "/", 
                 "method" => "GET|POST", 
                 "target" => function($request, $response, $args){
-                    $html = hubert()->container()->template->render("index", array("name" => "hubert"));
+                    $html = hubert()->template->render("index", array("name" => "hubert"));
                     $response->getBody()->write($html);
                     return $response;
                 }
