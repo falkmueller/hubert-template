@@ -13,23 +13,15 @@ class urlExtension implements ExtensionInterface {
         $engine->registerFunction('current_route', [$this, 'current_route']);
     }
     
-    public function getUrl($var){
-        if(is_string($var)){
-            return hubert()->router->get($var);
-        }
-        elseif (is_array($var)){
-            return hubert()->router->get($var["name"], isset($var["params"]) ? $var["params"] : array(), isset($var["get"]) ? $var["get"] : array());
-        }
-        
-        return "";
+    public function getUrl($name, $params = array(), $query = array()){
+        return hubert()->router->get($name, $params, $query);
     }
     
     public function getBaseUrl($var = ""){
         if($var && is_string($var)){
             return hubert()->router->getBasePath().$var;
         }
-        
-        
+
         return hubert()->router->getBasePath();
     }
     
