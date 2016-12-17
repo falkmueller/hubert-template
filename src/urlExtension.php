@@ -13,16 +13,22 @@ class urlExtension implements ExtensionInterface {
         $engine->registerFunction('current_route', [$this, 'current_route']);
     }
     
-    public function getUrl($name, $params = array(), $query = array()){
-        return hubert()->router->get($name, $params, $query);
+    public function getUrl($name, $params = array(), $query = array(), $withHost = false){
+        return hubert()->router->get($name, $params, $query, $withHost);
     }
     
-    public function getBaseUrl($var = ""){
+    public function getBaseUrl($var = "", $withHost = false){
+        $url = hubert()->router->getBasePath();
+        if ($withHost){
+            $request_uri = hubert()->request->getUri();     
+            $url = $request_uri->getScheme().'://'.$request_uri->getHost().$url;
+        }
+        
         if($var && is_string($var)){
-            return hubert()->router->getBasePath().$var;
+            return $url.$var;
         }
 
-        return hubert()->router->getBasePath();
+        return $url;
     }
     
     public function current_route(){
